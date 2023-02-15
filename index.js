@@ -2,7 +2,10 @@
 // where your node app starts
 
 // init project
+
 require('dotenv').config();
+const requestIp = require('request-ip');
+
 var express = require('express');
 var app = express();
 
@@ -20,10 +23,10 @@ app.get('/', function (req, res) {
 });
 
 app.get('/api/whoami', (req, res)=>{
-  const ipAddress = req.ip;
+  const ipaddress = requestIp.getClientIp(req);
   const language = req.headers['accept-language'];
   const software = req.headers['user-agent'];
-  res.json({ipAddress, language, software});
+  res.json({ipaddress, language, software});
 })
 
 // your first API endpoint...
